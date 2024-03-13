@@ -1,0 +1,9 @@
+databaseChangeLog:
+  -  changeSet:
+       id: add-unique-constraint-to-book-table
+       author:  liquibase-docs
+       changes:
+         -  addUniqueConstraint:
+              columnNames:  title, author_id
+              constraintName:  unique_title_author
+              tableName:  book
