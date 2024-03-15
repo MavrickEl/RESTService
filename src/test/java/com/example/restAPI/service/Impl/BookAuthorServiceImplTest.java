@@ -1,7 +1,5 @@
 package com.example.restAPI.service.Impl;
 
-import com.example.restAPI.dto.AuthorRequest;
-import com.example.restAPI.entity.Author;
 import com.example.restAPI.entity.BookAuthor;
 import com.example.restAPI.repo.BookAuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +35,7 @@ class BookAuthorServiceImplTest {
 
         bookAuthorService.save(bookAuthor);
 
-        verify(bookAuthorRepository,times(1)).save(bookAuthor);
+        verify(bookAuthorRepository, times(1)).save(bookAuthor);
     }
 
     @Test
