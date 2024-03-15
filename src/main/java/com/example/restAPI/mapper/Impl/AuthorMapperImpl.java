@@ -24,16 +24,7 @@ public class AuthorMapperImpl implements AuthorMapper {
                 .id(author.getId())
                 .name(author.getName())
                 .secondName(author.getSecondName())
-                .build();
-    }
-
-    @Override
-    public AuthorResponse toDtoResponseWithBooks(Author author, List<Book> books) {
-        return AuthorResponse.builder()
-                .id(author.getId())
-                .name(author.getName())
-                .secondName(author.getSecondName())
-                .books(books)
+                .books(author.getBooks())
                 .build();
     }
 }

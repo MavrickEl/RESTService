@@ -1,4 +1,4 @@
-package com.example.restAPI.dto;
+package com.example.restAPI.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class AuthorRequest {
+@AllArgsConstructor
+public class BookAuthor {
     private Long id;
-    private String name;
-    private String secondName;
+    private Long bookId;
+    private Long authorId;
+
 }

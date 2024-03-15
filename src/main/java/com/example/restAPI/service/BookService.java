@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface BookService {
-    BookResponse save(BookRequest bookRequest) throws SQLException;
+    void save(BookRequest bookRequest, List<Long> authorIds) throws SQLException;
 
     BookResponse getById(Long id) throws SQLException;
 
     List<BookResponse> getAll() throws SQLException;
 
-    BookResponse update(Long id, BookRequest bookRequest) throws SQLException;
+    void update(BookRequest bookRequest) throws SQLException;
 
     void delete(Long id) throws SQLException;
 }

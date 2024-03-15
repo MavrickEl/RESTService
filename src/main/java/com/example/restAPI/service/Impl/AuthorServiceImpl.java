@@ -14,18 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorServiceImpl implements AuthorService {
-    private final AuthorRepository authorRepo = new AuthorRepoImpl();
-    private final AuthorMapper mapper = new AuthorMapperImpl();
+    private AuthorRepository authorRepo = new AuthorRepoImpl();
+    private AuthorMapper mapper = new AuthorMapperImpl();
 
     @Override
-    public AuthorResponse save(AuthorRequest authorRequest) throws SQLException {
-        return mapper.toDtoResponse(authorRepo.save(mapper.toEntity(authorRequest)));
+    public void save(AuthorRequest authorRequest) throws SQLException {
+        authorRepo.save(mapper.toEntity(authorRequest));
     }
 
     @Override
     public AuthorResponse getById(Long id) throws SQLException {
         Author author = authorRepo.findById(id);
-        return (author != null) ? mapper.toDtoResponseWithBooks(author, author.getBooks()) : null;
+        return (author != null) ? mapper.toDtoResponse(author) : null;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class AuthorServiceImpl implements AuthorService {
         List<Author> authors = authorRepo.findAll();
         List<AuthorResponse> authorResponses = new ArrayList<>();
         for (Author author : authors) {
-            authorResponses.add(mapper.toDtoResponseWithBooks(author, author.getBooks()));
+            authorResponses.add(mapper.toDtoResponse(author));
         }
         return authorResponses;
     }
+
     @Override
-    public AuthorResponse update(Long id, AuthorRequest authorRequest) throws SQLException {
-        Author author = authorRepo.update(id, mapper.toEntity(authorRequest));
-        return mapper.toDtoResponse(author);
+    public void update(AuthorRequest authorRequest) throws SQLException {
+        authorRepo.update(mapper.toEntity(authorRequest));
     }
 
     @Override

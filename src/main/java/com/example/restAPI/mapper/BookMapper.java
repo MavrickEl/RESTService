@@ -13,6 +13,4 @@ public interface BookMapper {
 
     BookResponse toDtoResponse(Book book);
 
-    BookResponse toDtoResponseWithAuthors(Book book, List<Author> authors);
-
 }

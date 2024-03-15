@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-book
+      id: create-book-author
       author: Pasha
       changes:
         - createTable:
-            tableName: book
+            tableName: book_author
             columns:
               - column:
                   name: id
@@ -14,12 +14,18 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: title
-                  type: VARCHAR(255)
+                  name: book_id
+                  type: BIGINT
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_book_id
+                    references: book(id)
+                    deleteCascade: true
               - column:
-                  name: description
-                  type: VARCHAR(255)
+                  name: author_id
+                  type: BIGINT
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_author_id
+                    references: author(id)
+                    deleteCascade: true

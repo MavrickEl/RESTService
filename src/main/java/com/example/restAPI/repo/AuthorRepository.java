@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface AuthorRepository {
-    Author save(Author author) throws SQLException;
+    void save(Author author) throws SQLException;
     Author findById(Long id) throws SQLException;
     List<Author> findAll() throws SQLException;
-    Author update(Long id, Author author) throws SQLException;
+    void update(Author author) throws SQLException;
     void delete(Long id) throws SQLException;
 }

@@ -14,33 +14,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
-    private final BookRepository bookRepo = new BookRepoImpl();
-    private final BookMapper mapper = new BookMapperImpl();
+    private BookRepository bookRepo = new BookRepoImpl();
+    private BookMapper mapper = new BookMapperImpl();
 
     @Override
-    public BookResponse save(BookRequest bookRequest) throws SQLException {
-        Book book = bookRepo.save(mapper.toEntity(bookRequest));
-        return mapper.toDtoResponseWithAuthors(book, book.getAuthors());
+    public void save(BookRequest bookRequest, List<Long> authorIds) throws SQLException {
+        bookRepo.save(mapper.toEntity(bookRequest), authorIds);
     }
 
     @Override
     public BookResponse getById(Long id) throws SQLException {
         Book book = bookRepo.findById(id);
-        return mapper.toDtoResponseWithAuthors(book, book.getAuthors());
+        return mapper.toDtoResponse(book);
     }
 
     @Override
     public List<BookResponse> getAll() throws SQLException {
         List<Book> books = bookRepo.findAll();
         return books.stream()
-                .map((Book book) -> mapper.toDtoResponseWithAuthors(book, book.getAuthors()))
+                .map(mapper::toDtoResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public BookResponse update(Long id, BookRequest bookRequest) throws SQLException {
-        Book book = bookRepo.update(id, mapper.toEntity(bookRequest));
-        return mapper.toDtoResponse(book);
+    public void update(BookRequest bookRequest) throws SQLException {
+        bookRepo.update(mapper.toEntity(bookRequest));
     }
 
     @Override
