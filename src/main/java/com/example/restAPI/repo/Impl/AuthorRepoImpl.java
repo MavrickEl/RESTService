@@ -69,9 +69,9 @@ public class AuthorRepoImpl implements AuthorRepository {
 
         String sql = "SELECT a.*, b.id AS book_id, b.title, b.description " +
                 "FROM author a " +
-                "JOIN book_author ba ON a.id = ba.author_id " +
-                "JOIN book b ON ba.book_id = b.id " +
-                "ORDER BY b.id";
+                "LEFT JOIN book_author ba ON a.id = ba.author_id " +
+                "LEFT JOIN book b ON ba.book_id = b.id " +
+                "ORDER BY a.id, b.id";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
