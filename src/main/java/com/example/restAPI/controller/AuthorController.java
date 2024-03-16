@@ -100,6 +100,8 @@ public class AuthorController extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.getWriter().println("Невалидные данные");
         }
+        out.flush();
+
     }
 
     @Override
@@ -127,7 +129,7 @@ public class AuthorController extends HttpServlet {
             out.print(e.getMessage());
 
         }
-
+        out.flush();
     }
 
     private static HttpServletResponse initResp(HttpServletResponse resp, int status) {
